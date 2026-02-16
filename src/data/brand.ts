@@ -26,6 +26,9 @@ export const BRAND = {
   },
 } as const;
 
+// Demo video scene timing - re-exported from demoTiming.ts for convenience
+export { DEMO_SCENE_TIMING } from './demoTiming';
+
 export const SCENE_TIMING = {
   scene01: { start: 0, duration: 450 },
   scene02: { start: 450, duration: 450 },

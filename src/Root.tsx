@@ -1,5 +1,6 @@
 import { Composition } from 'remotion';
 import { InsuranceAgencyVideo } from './compositions/InsuranceAgencyVideo';
+import { LeadProcessingDemo } from './compositions/LeadProcessingDemo';
 import { Scene01_Hook } from './scenes/Scene01_Hook';
 import { Scene02_Intro } from './scenes/Scene02_Intro';
 import { Scene03_Problem } from './scenes/Scene03_Problem';
@@ -12,7 +13,15 @@ import { Scene09_Marketing } from './scenes/Scene09_Marketing';
 import { Scene10_Vision } from './scenes/Scene10_Vision';
 import { Scene11_CTA } from './scenes/Scene11_CTA';
 import { Scene12_Outro } from './scenes/Scene12_Outro';
+import { Demo01_LeadUpload } from './scenes/Demo01_LeadUpload';
+import { Demo02_QuoteProcessing } from './scenes/Demo02_QuoteProcessing';
+import { Demo03_CRMView } from './scenes/Demo03_CRMView';
+import { Demo04_Communications } from './scenes/Demo04_Communications';
+import { Demo05_ResponseDashboard } from './scenes/Demo05_ResponseDashboard';
+import { Demo06_FollowUpQueue } from './scenes/Demo06_FollowUpQueue';
+import { Demo07_ResultsSummary } from './scenes/Demo07_ResultsSummary';
 import { SCENE_TIMING, BRAND } from './data/brand';
+import { DEMO_SCENE_TIMING, DEMO_TOTAL_FRAMES } from './data/demoTiming';
 
 const { width, height, fps } = BRAND.video;
 
@@ -31,6 +40,16 @@ const scenes = [
   { id: 'Scene12-Outro', component: Scene12_Outro, timing: SCENE_TIMING.scene12 },
 ] as const;
 
+const demoScenes = [
+  { id: 'Demo01-LeadUpload', component: Demo01_LeadUpload, timing: DEMO_SCENE_TIMING.demo01 },
+  { id: 'Demo02-QuoteProcessing', component: Demo02_QuoteProcessing, timing: DEMO_SCENE_TIMING.demo02 },
+  { id: 'Demo03-CRMView', component: Demo03_CRMView, timing: DEMO_SCENE_TIMING.demo03 },
+  { id: 'Demo04-Communications', component: Demo04_Communications, timing: DEMO_SCENE_TIMING.demo04 },
+  { id: 'Demo05-ResponseDashboard', component: Demo05_ResponseDashboard, timing: DEMO_SCENE_TIMING.demo05 },
+  { id: 'Demo06-FollowUpQueue', component: Demo06_FollowUpQueue, timing: DEMO_SCENE_TIMING.demo06 },
+  { id: 'Demo07-ResultsSummary', component: Demo07_ResultsSummary, timing: DEMO_SCENE_TIMING.demo07 },
+] as const;
+
 export const RemotionRoot: React.FC = () => {
   return (
     <>
@@ -43,7 +62,30 @@ export const RemotionRoot: React.FC = () => {
         height={height}
       />
 
+      <Composition
+        id="LeadProcessingDemo"
+        component={LeadProcessingDemo}
+        durationInFrames={DEMO_TOTAL_FRAMES}
+        fps={fps}
+        width={width}
+        height={height}
+      />
+
       {scenes.map(({ id, component, timing }) => (
+        <Composition
+          key={id}
+          id={id}
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          component={component as any}
+          durationInFrames={timing.duration}
+          fps={fps}
+          width={width}
+          height={height}
+          defaultProps={{ durationInFrames: timing.duration }}
+        />
+      ))}
+
+      {demoScenes.map(({ id, component, timing }) => (
         <Composition
           key={id}
           id={id}
