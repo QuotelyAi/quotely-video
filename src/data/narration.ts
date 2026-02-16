@@ -1,0 +1,88 @@
+import type { NarrationSegment } from '../types';
+
+export const NARRATION: Record<string, NarrationSegment> = {
+  scene01: {
+    sceneId: 'scene01',
+    text: "In the fast-paced world of insurance, agencies struggle to keep up with complex processes, time-consuming paperwork, and ever-changing client demands. What if there was a way to transform these challenges into seamless operations?",
+    audioFile: 'scene01_hook.mp3',
+    imagePrompt: "A bustling insurance office with stacks of paperwork, stressed agents on phones, and computer screens filled with data. Photorealistic, cinematic lighting showing a sense of urgency.",
+    imageFile: 'scenes/scene01.png',
+  },
+  scene02: {
+    sceneId: 'scene02',
+    text: "Welcome to Quotely, where we revolutionize insurance agency operations with cutting-edge AI automation. I'm your guide today, and I'll show you how Quotely transforms the way agencies operate, making them more efficient and client-focused.",
+    audioFile: 'scene02_intro.mp3',
+    imagePrompt: "A modern, sleek office with a digital interface showcasing the Quotely logo prominently. A professional presenter stands confidently, ready to explain the platform. Photorealistic, cinematic.",
+    imageFile: 'scenes/scene02.png',
+  },
+  scene03: {
+    sceneId: 'scene03',
+    text: "The insurance industry is plagued by inefficiencies: agents spend 60% of their time on administrative tasks, and 75% of agencies report losing clients due to slow response times. It's time for a change.",
+    audioFile: 'scene03_problem.mp3',
+    imagePrompt: "A split-screen showing an overwhelmed insurance agent on one side and a clock ticking fast on the other. Charts and graphs depict inefficiencies in bold, eye-catching colors. Photorealistic, cinematic.",
+    imageFile: 'scenes/scene03.png',
+  },
+  scene04: {
+    sceneId: 'scene04',
+    text: "Quotely's AI-powered quoting system cuts the process from hours to minutes, providing clients with real-time, accurate quotes. Imagine increasing your agency's productivity by 40% overnight.",
+    audioFile: 'scene04_quoting.mp3',
+    imagePrompt: "A digital interface showing a sleek, fast-moving quoting process with numbers and data flowing smoothly. The background shows satisfied clients receiving instant quotes. Photorealistic, cinematic.",
+    imageFile: 'scenes/scene04.png',
+  },
+  scene05: {
+    sceneId: 'scene05',
+    text: "Say goodbye to missed opportunities with our AI-driven lead management system. Quotely scores and nurtures leads with precision, increasing conversion rates by 30% and ensuring no prospect falls through the cracks.",
+    audioFile: 'scene05_leads.mp3',
+    imagePrompt: "A dynamic visual of a digital dashboard sorting and scoring leads with vibrant colors and clear indicators. A network of connected leads flowing seamlessly. Photorealistic, cinematic.",
+    imageFile: 'scenes/scene05.png',
+  },
+  scene06: {
+    sceneId: 'scene06',
+    text: "With Quotely, never miss a client interaction. Our 24/7 AI communication handles all client inquiries, ensuring seamless interactions and boosting client satisfaction by up to 50%.",
+    audioFile: 'scene06_communication.mp3',
+    imagePrompt: "A futuristic call center with AI avatars interacting with clients on various screens. Clients are happy and engaged, showcasing a global reach. Photorealistic, cinematic.",
+    imageFile: 'scenes/scene06.png',
+  },
+  scene07: {
+    sceneId: 'scene07',
+    text: "Automate your policy management with our AI system. From document processing to compliance checks, Quotely ensures accuracy and efficiency, reducing manual errors by 70%.",
+    audioFile: 'scene07_policy.mp3',
+    imagePrompt: "A digital workspace with automated document processing in action. A flow of digital documents being seamlessly processed and checked for compliance. Photorealistic, cinematic.",
+    imageFile: 'scenes/scene07.png',
+  },
+  scene08: {
+    sceneId: 'scene08',
+    text: "Streamline claims processing with our conversational AI. Clients can file claims effortlessly, reducing processing time by 60% and enhancing their overall experience.",
+    audioFile: 'scene08_claims.mp3',
+    imagePrompt: "A digital assistant helping a client file a claim through a user-friendly interface on a tablet. The background displays a quick and efficient claims process. Photorealistic, cinematic.",
+    imageFile: 'scenes/scene08.png',
+  },
+  scene09: {
+    sceneId: 'scene09',
+    text: "Quotely's AI marketing tools automate campaigns and optimize strategies, increasing ROI by 45%. Reach the right audience with precision and watch your business grow.",
+    audioFile: 'scene09_marketing.mp3',
+    imagePrompt: "A vibrant, dynamic display of digital marketing campaigns with analytics and growth charts. A representation of target audiences being effectively reached. Photorealistic, cinematic.",
+    imageFile: 'scenes/scene09.png',
+  },
+  scene10: {
+    sceneId: 'scene10',
+    text: "Imagine an insurance agency where every operation is seamless, every client is satisfied, and growth is limitless. With Quotely, this future is within reach.",
+    audioFile: 'scene10_vision.mp3',
+    imagePrompt: "A visionary scene of a futuristic, highly efficient insurance agency. Agents and clients interact seamlessly in a tech-driven environment. Photorealistic, cinematic.",
+    imageFile: 'scenes/scene10.png',
+  },
+  scene11: {
+    sceneId: 'scene11',
+    text: "Ready to transform your agency? Visit tryquotely.com to book a demo and see the future of insurance operations firsthand.",
+    audioFile: 'scene11_cta.mp3',
+    imagePrompt: "A sleek, modern digital interface with the URL tryquotely.com prominently displayed. An inviting call-to-action visual with a 'Book a Demo' button. Photorealistic, cinematic.",
+    imageFile: 'scenes/scene11.png',
+  },
+  scene12: {
+    sceneId: 'scene12',
+    text: "Don't forget to subscribe to our channel, like this video, and hit the notification bell for the latest in insurance tech innovation.",
+    audioFile: 'scene12_outro.mp3',
+    imagePrompt: "A friendly, modern digital interface with subscribe, like, and notification bell icons. A professional presenter gestures towards these icons invitingly. Photorealistic, cinematic.",
+    imageFile: 'scenes/scene12.png',
+  },
+};

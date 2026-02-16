@@ -1,0 +1,42 @@
+{
+  "name": "template-empty",
+  "version": "1.0.0",
+  "description": "My Remotion video",
+  "scripts": {
+    "dev": "remotion studio",
+    "build": "remotion bundle",
+    "upgrade": "remotion upgrade",
+    "lint": "eslint src && tsc",
+    "generate:script": "npx tsx scripts/generate-script.ts",
+    "generate:images": "npx tsx scripts/generate-images.ts",
+    "generate:tts": "npx tsx scripts/generate-tts.ts",
+    "generate:subtitles": "npx tsx scripts/generate-subtitles.ts",
+    "generate:all": "npx tsx scripts/generate-all.ts"
+  },
+  "repository": {},
+  "license": "UNLICENSED",
+  "dependencies": {
+    "@google/generative-ai": "^0.24.1",
+    "@remotion/cli": "^4.0.0",
+    "@remotion/media-utils": "^4.0.422",
+    "dotenv": "^17.3.1",
+    "openai": "^6.22.0",
+    "react": "19.2.3",
+    "react-dom": "19.2.3",
+    "remotion": "^4.0.0",
+    "zod": "3.22.3"
+  },
+  "devDependencies": {
+    "@remotion/eslint-config-flat": "^4.0.0",
+    "@types/react": "19.2.7",
+    "@types/web": "0.0.166",
+    "eslint": "9.19.0",
+    "prettier": "3.6.0",
+    "tsx": "^4.21.0",
+    "typescript": "5.9.3"
+  },
+  "private": true,
+  "overrides": {
+    "zod": "3.22.3"
+  }
+}

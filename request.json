@@ -1,0 +1,11 @@
+{
+    "instances": [{
+        "prompt": "A cinematic aerial shot of a mountain landscape at golden hour with clouds rolling through valleys"
+    }],
+    "parameters": {
+        "aspectRatio": "16:9",
+        "sampleCount": 1,
+        "durationSeconds": 8,
+        "resolution": "720p"
+    }
+}

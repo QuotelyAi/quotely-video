@@ -1,0 +1,6 @@
+node_modules
+dist
+.DS_Store
+.env
+
+# Keep out/ tracked so rendered videos are available on GitHub
