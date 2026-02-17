@@ -105,3 +105,24 @@ export const springIn = (
 
 export const glowPulse = (frame: number, speed: number = 0.08): number =>
   0.5 + Math.sin(frame * speed) * 0.5;
+
+export const slapIn = (
+  frame: number,
+  fps: number,
+  delay: number = 0
+): number =>
+  spring({
+    frame: frame - delay,
+    fps,
+    config: { damping: 8, stiffness: 200, mass: 0.6 },
+  });
+
+export const wipeReveal = (
+  frame: number,
+  delay: number = 0,
+  duration: number = 20
+): number =>
+  interpolate(frame, [delay, delay + duration], [0, 100], {
+    extrapolateLeft: 'clamp',
+    extrapolateRight: 'clamp',
+  });

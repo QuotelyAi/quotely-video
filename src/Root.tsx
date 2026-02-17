@@ -20,6 +20,8 @@ import { Demo04_Communications } from './scenes/Demo04_Communications';
 import { Demo05_ResponseDashboard } from './scenes/Demo05_ResponseDashboard';
 import { Demo06_FollowUpQueue } from './scenes/Demo06_FollowUpQueue';
 import { Demo07_ResultsSummary } from './scenes/Demo07_ResultsSummary';
+import { Cutaway01_ManualQuoting } from './scenes/Cutaway01_ManualQuoting';
+import { Cutaway02_SpeedToLead } from './scenes/Cutaway02_SpeedToLead';
 import { SCENE_TIMING, BRAND } from './data/brand';
 import { DEMO_SCENE_TIMING, DEMO_TOTAL_FRAMES } from './data/demoTiming';
 
@@ -42,8 +44,10 @@ const scenes = [
 
 const demoScenes = [
   { id: 'Demo01-LeadUpload', component: Demo01_LeadUpload, timing: DEMO_SCENE_TIMING.demo01 },
+  { id: 'Cutaway01-ManualQuoting', component: Cutaway01_ManualQuoting, timing: DEMO_SCENE_TIMING.cutaway01 },
   { id: 'Demo02-QuoteProcessing', component: Demo02_QuoteProcessing, timing: DEMO_SCENE_TIMING.demo02 },
   { id: 'Demo03-CRMView', component: Demo03_CRMView, timing: DEMO_SCENE_TIMING.demo03 },
+  { id: 'Cutaway02-SpeedToLead', component: Cutaway02_SpeedToLead, timing: DEMO_SCENE_TIMING.cutaway02 },
   { id: 'Demo04-Communications', component: Demo04_Communications, timing: DEMO_SCENE_TIMING.demo04 },
   { id: 'Demo05-ResponseDashboard', component: Demo05_ResponseDashboard, timing: DEMO_SCENE_TIMING.demo05 },
   { id: 'Demo06-FollowUpQueue', component: Demo06_FollowUpQueue, timing: DEMO_SCENE_TIMING.demo06 },

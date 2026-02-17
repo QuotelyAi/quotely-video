@@ -35,7 +35,7 @@ export const Demo01_LeadUpload: React.FC<SceneProps> = ({ durationInFrames }) =>
   return (
     <AbsoluteFill style={{ backgroundColor: BRAND.colors.background }}>
       <div style={{ padding: 40, width: '100%', height: '100%' }}>
-        <BrowserChrome url="app.quotely.com/dashboard">
+        <BrowserChrome url="app.quotely.info/dashboard">
           <DashboardLayout activeNav="Leads" headerTitle="Lead Management">
             <div style={{ position: 'relative', width: '100%', height: '100%' }}>
               {/* Main content area */}

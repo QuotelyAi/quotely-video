@@ -25,7 +25,7 @@ export const Demo07_ResultsSummary: React.FC<SceneProps> = ({ durationInFrames }
   return (
     <AbsoluteFill style={{ backgroundColor: BRAND.colors.background }}>
       <div style={{ padding: 40, width: '100%', height: '100%' }}>
-        <BrowserChrome url="app.quotely.com/dashboard">
+        <BrowserChrome url="app.quotely.info/dashboard">
           <DashboardLayout activeNav="Dashboard" headerTitle="Dashboard">
             <div
               style={{
@@ -117,7 +117,7 @@ export const Demo07_ResultsSummary: React.FC<SceneProps> = ({ durationInFrames }
                       color: BRAND.colors.textSecondary,
                     }}
                   >
-                    quotely.com
+                    quotely.info
                   </div>
                 </div>
               )}

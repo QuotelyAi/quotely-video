@@ -1,7 +1,7 @@
 import React from 'react';
-import { AbsoluteFill, useCurrentFrame } from 'remotion';
+import { AbsoluteFill, useCurrentFrame, useVideoConfig, interpolate } from 'remotion';
 import { BRAND } from '../data/brand';
-import { fadeIn, countUp, scaleIn } from '../utils/animations';
+import { fadeIn, countUp, slapIn } from '../utils/animations';
 import { BrowserChrome } from '../components/demo/BrowserChrome';
 import { DashboardLayout } from '../components/demo/DashboardLayout';
 import { StatCard } from '../components/demo/StatCard';
@@ -32,7 +32,7 @@ export const Demo05_ResponseDashboard: React.FC<SceneProps> = ({ durationInFrame
   return (
     <AbsoluteFill style={{ backgroundColor: BRAND.colors.background }}>
       <div style={{ padding: 40, width: '100%', height: '100%' }}>
-        <BrowserChrome url="app.quotely.com/analytics">
+        <BrowserChrome url="app.quotely.info/analytics">
           <DashboardLayout activeNav="Analytics" headerTitle="Engagement Analytics">
             <div style={{ position: 'relative', width: '100%', height: '100%' }}>
               {/* Header */}
@@ -230,6 +230,70 @@ export const Demo05_ResponseDashboard: React.FC<SceneProps> = ({ durationInFrame
       </div>
 
       <SubtitleOverlay subtitles={DEMO_SUBTITLES.demo05} />
+
+      {/* Fourth-wall engagement insight overlay */}
+      <FourthWallInsight frame={frame} />
+    </AbsoluteFill>
+  );
+};
+
+const INSIGHT_APPEAR = 450;
+const INSIGHT_DURATION = 150;
+
+const FourthWallInsight: React.FC<{ frame: number }> = ({ frame }) => {
+  const { fps } = useVideoConfig();
+  const localFrame = frame - INSIGHT_APPEAR;
+  if (localFrame < 0 || localFrame > INSIGHT_DURATION) return null;
+
+  const gold = BRAND.colors.primary;
+
+  // Dark overlay fades in
+  const overlayOpacity = interpolate(localFrame, [0, 12], [0, 0.85], {
+    extrapolateLeft: 'clamp',
+    extrapolateRight: 'clamp',
+  }) * interpolate(localFrame, [INSIGHT_DURATION - 15, INSIGHT_DURATION], [1, 0], {
+    extrapolateLeft: 'clamp',
+    extrapolateRight: 'clamp',
+  });
+
+  // Text springs in
+  const textScale = slapIn(localFrame, fps, 8);
+  const subtextOpacity = fadeIn(localFrame, 20, 12);
+
+  return (
+    <AbsoluteFill
+      style={{
+        backgroundColor: `rgba(0, 0, 0, ${overlayOpacity})`,
+        justifyContent: 'center',
+        alignItems: 'center',
+        pointerEvents: 'none',
+      }}
+    >
+      <div style={{ textAlign: 'center', transform: `scale(${textScale})` }}>
+        <div
+          style={{
+            fontFamily: BRAND.fonts.primary,
+            fontSize: 56,
+            fontWeight: 800,
+            color: gold,
+            marginBottom: 16,
+            textShadow: `0 2px 16px ${gold}44`,
+          }}
+        >
+          Maria opened her quote 3 times.
+        </div>
+        <div
+          style={{
+            fontFamily: BRAND.fonts.primary,
+            fontSize: 32,
+            fontWeight: 500,
+            color: '#FFFFFF',
+            opacity: subtextOpacity,
+          }}
+        >
+          She's not browsing. She's buying. <span style={{ color: gold, fontWeight: 700 }}>Call her NOW.</span>
+        </div>
+      </div>
     </AbsoluteFill>
   );
 };

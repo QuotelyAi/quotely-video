@@ -7,6 +7,8 @@ import demo04 from '../data/demoSubtitles/demo04.json';
 import demo05 from '../data/demoSubtitles/demo05.json';
 import demo06 from '../data/demoSubtitles/demo06.json';
 import demo07 from '../data/demoSubtitles/demo07.json';
+import cutaway01 from '../data/demoSubtitles/cutaway01.json';
+import cutaway02 from '../data/demoSubtitles/cutaway02.json';
 
 export const DEMO_SUBTITLES: Record<string, SubtitleEntry[]> = {
   demo01: demo01 as SubtitleEntry[],
@@ -16,4 +18,6 @@ export const DEMO_SUBTITLES: Record<string, SubtitleEntry[]> = {
   demo05: demo05 as SubtitleEntry[],
   demo06: demo06 as SubtitleEntry[],
   demo07: demo07 as SubtitleEntry[],
+  cutaway01: cutaway01 as SubtitleEntry[],
+  cutaway02: cutaway02 as SubtitleEntry[],
 };

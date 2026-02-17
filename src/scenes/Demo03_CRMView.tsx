@@ -37,7 +37,7 @@ export const Demo03_CRMView: React.FC<SceneProps> = ({ durationInFrames }) => {
   return (
     <AbsoluteFill style={{ backgroundColor: BRAND.colors.background }}>
       <div style={{ padding: 40, width: '100%', height: '100%' }}>
-        <BrowserChrome url="app.quotely.com/leads">
+        <BrowserChrome url="app.quotely.info/leads">
           <DashboardLayout activeNav="Leads" headerTitle="CRM — All Leads">
             <div style={{ position: 'relative', width: '100%', height: '100%' }}>
               {/* Header area */}

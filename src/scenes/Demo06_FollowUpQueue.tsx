@@ -40,7 +40,7 @@ export const Demo06_FollowUpQueue: React.FC<SceneProps> = ({ durationInFrames })
   return (
     <AbsoluteFill style={{ backgroundColor: BRAND.colors.background }}>
       <div style={{ padding: 40, width: '100%', height: '100%' }}>
-        <BrowserChrome url="app.quotely.com/follow-ups">
+        <BrowserChrome url="app.quotely.info/follow-ups">
           <DashboardLayout activeNav="Leads" headerTitle="Follow-Up Queue">
             <div style={{ position: 'relative', width: '100%', height: '100%' }}>
               {/* Header */}

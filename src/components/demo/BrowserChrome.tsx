@@ -8,7 +8,7 @@ interface BrowserChromeProps {
 
 export const BrowserChrome: React.FC<BrowserChromeProps> = ({
   children,
-  url = 'app.quotely.com',
+  url = 'app.quotely.info',
 }) => {
   return (
     <div

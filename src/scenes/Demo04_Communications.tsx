@@ -37,7 +37,7 @@ export const Demo04_Communications: React.FC<SceneProps> = ({ durationInFrames }
   return (
     <AbsoluteFill style={{ backgroundColor: BRAND.colors.background }}>
       <div style={{ padding: 40, width: '100%', height: '100%' }}>
-        <BrowserChrome url="app.quotely.com/leads">
+        <BrowserChrome url="app.quotely.info/leads">
           <DashboardLayout activeNav="Communications" headerTitle="Communications">
             <div style={{ position: 'relative', width: '100%', height: '100%' }}>
               {/* Header */}
@@ -112,7 +112,7 @@ export const Demo04_Communications: React.FC<SceneProps> = ({ durationInFrames }
                 <TimelineItem
                   icon="💬"
                   title="SMS Sent"
-                  description="Hi James, your quote from Progressive is ready! Click to review: quotely.com/q/js892"
+                  description="Hi James, your quote from Progressive is ready! Click to review: quotely.info/q/js892"
                   timestamp="2:01 PM"
                   delay={360}
                   color="#A855F7"
@@ -120,7 +120,7 @@ export const Demo04_Communications: React.FC<SceneProps> = ({ durationInFrames }
                 <TimelineItem
                   icon="🔗"
                   title="Quote Link Generated"
-                  description="quotely.com/q/js892 — expires in 7 days"
+                  description="quotely.info/q/js892 — expires in 7 days"
                   timestamp="2:01 PM"
                   delay={400}
                   color={BRAND.colors.textSecondary}

@@ -7,6 +7,7 @@ import { DashboardLayout } from '../components/demo/DashboardLayout';
 import { LeadCard } from '../components/demo/LeadCard';
 import { ProgressBar } from '../components/demo/ProgressBar';
 import { SubtitleOverlay } from '../components/SubtitleOverlay';
+import { JargonBuster } from '../components/demo/JargonBuster';
 import { DEMO_SUBTITLES } from '../utils/demoSubtitles';
 import { MOCK_LEADS } from '../data/mockLeads';
 import type { SceneProps } from '../types';
@@ -39,7 +40,7 @@ export const Demo02_QuoteProcessing: React.FC<SceneProps> = ({ durationInFrames 
   return (
     <AbsoluteFill style={{ backgroundColor: BRAND.colors.background }}>
       <div style={{ padding: 40, width: '100%', height: '100%' }}>
-        <BrowserChrome url="app.quotely.com/processing">
+        <BrowserChrome url="app.quotely.info/processing">
           <DashboardLayout activeNav="Quotes" headerTitle="Quote Processing">
             <div style={{ position: 'relative', width: '100%', height: '100%' }}>
               {/* Processing header */}
@@ -211,6 +212,13 @@ export const Demo02_QuoteProcessing: React.FC<SceneProps> = ({ durationInFrames 
           </DashboardLayout>
         </BrowserChrome>
       </div>
+
+      <JargonBuster
+        term="Multi-Carrier Quoting"
+        definition="Getting prices from 5 insurance companies at the same time. Instead of filling out 5 separate websites."
+        appearFrame={60}
+        duration={150}
+      />
 
       <SubtitleOverlay subtitles={DEMO_SUBTITLES.demo02} />
     </AbsoluteFill>
