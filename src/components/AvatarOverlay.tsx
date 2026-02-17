@@ -37,8 +37,7 @@ export const AvatarOverlay: React.FC<AvatarOverlayProps> = ({
     // getStaticFiles not available in render context
   }
 
-  // If neither file exists, don't render the avatar
-  if (!videoExists && !imageExists) return null;
+  const showPlaceholder = !videoExists && !imageExists;
 
   const enterOpacity = fadeIn(frame, showFrom, 15);
   const exitOpacity = interpolate(
@@ -85,6 +84,47 @@ export const AvatarOverlay: React.FC<AvatarOverlayProps> = ({
               objectFit: 'cover',
             }}
           />
+        )}
+        {showPlaceholder && (
+          <div
+            style={{
+              width: '100%',
+              height: '100%',
+              backgroundColor: '#0a0a1a',
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'center',
+              alignItems: 'center',
+              gap: 12,
+            }}
+          >
+            <div
+              style={{
+                width: 80,
+                height: 80,
+                borderRadius: '50%',
+                backgroundColor: `${BRAND.colors.primary}22`,
+                border: `2px solid ${BRAND.colors.primary}44`,
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                fontSize: 36,
+              }}
+            >
+              <span style={{ color: BRAND.colors.primary }}>Q</span>
+            </div>
+            <div
+              style={{
+                fontSize: 13,
+                color: BRAND.colors.textSecondary,
+                fontFamily: BRAND.fonts.primary,
+                textAlign: 'center',
+                padding: '0 20px',
+              }}
+            >
+              AI Agent
+            </div>
+          </div>
         )}
       </div>
       {/* Name label */}
