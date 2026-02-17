@@ -8,12 +8,12 @@ export const DEMO_NARRATION: NarrationSegment[] = [
   },
   {
     sceneId: 'cutaway01',
-    text: "Let's pause for a second. 50 leads, 5 carriers each — that's 250 separate quote forms. Filled out by hand. Or, you just press one button and let Quotely handle all of them at once.",
+    text: "Let's pause for a second. 50 leads, 20 carriers each — that's a thousand quote forms. With EZLynx, you're still clicking through every single one. Quotely automates the entire process. No clicking. No waiting. No extra staff.",
     audioFile: 'audio/cutaway01_manual.mp3',
   },
   {
     sceneId: 'demo02',
-    text: "Quotely's AI instantly begins processing all 50 quotes. Watch as the system pulls rates from multiple carriers simultaneously — something that would take agents hours to do manually.",
+    text: "Quotely's AI instantly begins processing all 50 quotes across your full carrier lineup. Raters like EZLynx still need someone sitting there running each quote. Quotely does it all — no extra hands needed.",
     audioFile: 'audio/demo02_processing.mp3',
   },
   {
@@ -23,7 +23,7 @@ export const DEMO_NARRATION: NarrationSegment[] = [
   },
   {
     sceneId: 'cutaway02',
-    text: "Here's the thing — 78 percent of leads buy from the first agent who calls. Manual quoting takes 2 to 4 hours. Quotely does it in 12 seconds. The lead doesn't care about your process. They care who called first.",
+    text: "Here's the thing — 78 percent of leads buy from the first agent who calls. With a traditional rater, quoting takes 2 to 4 hours and ties up your staff. Quotely does it in 12 seconds with zero human involvement. That's not just faster — it means you don't need to hire more people to handle the volume.",
     audioFile: 'audio/cutaway02_speed.mp3',
   },
   {
@@ -43,7 +43,7 @@ export const DEMO_NARRATION: NarrationSegment[] = [
   },
   {
     sceneId: 'demo07',
-    text: "From upload to engagement tracking, Quotely handled 50 leads autonomously in under two minutes. This is the future of insurance operations.",
+    text: "From upload to engagement tracking, Quotely handled 50 leads autonomously in under two minutes. No extra payroll. No manual quoting. Just smooth, automated workflow that lets your agency do more with less. This is Quotely versus EZLynx — and it's not even close.",
     audioFile: 'audio/demo07_summary.mp3',
   },
 ];

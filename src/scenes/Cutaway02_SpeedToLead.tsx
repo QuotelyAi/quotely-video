@@ -93,7 +93,7 @@ export const Cutaway02_SpeedToLead: React.FC<SceneProps> = ({ durationInFrames }
                 marginBottom: 12,
               }}
             >
-              Manual
+              EZLynx
             </div>
             <div
               style={{
@@ -163,7 +163,7 @@ export const Cutaway02_SpeedToLead: React.FC<SceneProps> = ({ durationInFrames }
               maxWidth: 800,
             }}
           >
-            The lead doesn't care about your process. They care who called first.
+            No extra staff. No manual clicks. Just results.
           </div>
         )}
       </AbsoluteFill>

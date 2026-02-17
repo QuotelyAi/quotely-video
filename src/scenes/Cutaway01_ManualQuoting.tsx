@@ -7,7 +7,7 @@ import { typewriter, fadeIn, slapIn } from '../utils/animations';
 import { BRAND } from '../data/brand';
 import type { SceneProps } from '../types';
 
-const TOTAL_DOTS = 250;
+const TOTAL_DOTS = 400; // Representative grid (actual: 1,000)
 const COLS = 25;
 
 export const Cutaway01_ManualQuoting: React.FC<SceneProps> = ({ durationInFrames }) => {
@@ -17,7 +17,7 @@ export const Cutaway01_ManualQuoting: React.FC<SceneProps> = ({ durationInFrames
 
   // Phase timing
   const typewriterStart = 35;
-  const typewriterText = "That's 250 separate forms. Filled out. By hand.";
+  const typewriterText = "That's 1,000 quote forms. EZLynx makes you click through each one.";
   const typewriterDuration = typewriterText.length / 1.2;
   const gridStart = 70;
   const redPhaseEnd = 155; // Dots turn red one-by-one
@@ -58,7 +58,7 @@ export const Cutaway01_ManualQuoting: React.FC<SceneProps> = ({ durationInFrames
             letterSpacing: '-1px',
           }}
         >
-          50 LEADS. 5 CARRIERS EACH.
+          50 LEADS. 20 CARRIERS EACH.
         </div>
 
         {/* Typewriter subtext */}
@@ -124,7 +124,7 @@ export const Cutaway01_ManualQuoting: React.FC<SceneProps> = ({ durationInFrames
               textShadow: `0 2px 12px ${gold}44`,
             }}
           >
-            Or just press one button.
+            Quotely does it all. Automatically.
           </div>
         )}
       </AbsoluteFill>

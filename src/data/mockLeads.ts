@@ -45,8 +45,8 @@ const vehicles = [
 ];
 
 const carriers = [
-  'Progressive', 'GEICO', 'State Farm', 'Allstate', 'Liberty Mutual',
-  'Nationwide', 'Travelers', 'USAA', 'Farmers', 'American Family',
+  'Progressive', 'GEICO', 'Liberty Mutual', 'Travelers', 'Mercury',
+  'Nationwide', 'Safeco', 'Kemper', 'Bristol West', 'Foremost',
 ];
 
 export const MOCK_LEADS: MockLead[] = Array.from({ length: 50 }, (_, i) => {

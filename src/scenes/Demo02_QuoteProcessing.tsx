@@ -15,9 +15,9 @@ import type { SceneProps } from '../types';
 const CARRIERS = [
   { name: 'Progressive', color: '#0070F3' },
   { name: 'GEICO', color: '#00875A' },
-  { name: 'State Farm', color: '#E31837' },
-  { name: 'Allstate', color: '#003DA5' },
   { name: 'Liberty Mutual', color: '#F5A623' },
+  { name: 'Travelers', color: '#E31837' },
+  { name: 'Mercury', color: '#003DA5' },
 ];
 
 export const Demo02_QuoteProcessing: React.FC<SceneProps> = ({ durationInFrames }) => {
@@ -215,7 +215,7 @@ export const Demo02_QuoteProcessing: React.FC<SceneProps> = ({ durationInFrames 
 
       <JargonBuster
         term="Multi-Carrier Quoting"
-        definition="Getting prices from 5 insurance companies at the same time. Instead of filling out 5 separate websites."
+        definition="Getting prices from 20+ insurance companies at the same time. EZLynx makes you click through each one. Quotely automates the entire process."
         appearFrame={60}
         duration={150}
       />
