@@ -7,6 +7,11 @@ export const DEMO_NARRATION: NarrationSegment[] = [
     audioFile: 'audio/demo01_upload.mp3',
   },
   {
+    sceneId: 'cutaway01',
+    text: "Let's pause for a second. 50 leads, 5 carriers each — that's 250 separate quote forms. Filled out by hand. Or, you just press one button and let Quotely handle all of them at once.",
+    audioFile: 'audio/cutaway01_manual.mp3',
+  },
+  {
     sceneId: 'demo02',
     text: "Quotely's AI instantly begins processing all 50 quotes. Watch as the system pulls rates from multiple carriers simultaneously — something that would take agents hours to do manually.",
     audioFile: 'audio/demo02_processing.mp3',
@@ -15,6 +20,11 @@ export const DEMO_NARRATION: NarrationSegment[] = [
     sceneId: 'demo03',
     text: "In the CRM, all 50 leads are now quoted. Each lead has accurate pricing from multiple carriers, ready to present to the customer.",
     audioFile: 'audio/demo03_crm.mp3',
+  },
+  {
+    sceneId: 'cutaway02',
+    text: "Here's the thing — 78 percent of leads buy from the first agent who calls. Manual quoting takes 2 to 4 hours. Quotely does it in 12 seconds. The lead doesn't care about your process. They care who called first.",
+    audioFile: 'audio/cutaway02_speed.mp3',
   },
   {
     sceneId: 'demo04',
