@@ -22,6 +22,7 @@ import { Demo06_FollowUpQueue } from './scenes/Demo06_FollowUpQueue';
 import { Demo07_ResultsSummary } from './scenes/Demo07_ResultsSummary';
 import { Cutaway01_ManualQuoting } from './scenes/Cutaway01_ManualQuoting';
 import { Cutaway02_SpeedToLead } from './scenes/Cutaway02_SpeedToLead';
+import { YouTubeThumbnail } from './compositions/YouTubeThumbnail';
 import { SCENE_TIMING, BRAND } from './data/brand';
 import { DEMO_SCENE_TIMING, DEMO_TOTAL_FRAMES } from './data/demoTiming';
 
@@ -73,6 +74,15 @@ export const RemotionRoot: React.FC = () => {
         fps={fps}
         width={width}
         height={height}
+      />
+
+      <Composition
+        id="YouTubeThumbnail"
+        component={YouTubeThumbnail}
+        durationInFrames={1}
+        fps={fps}
+        width={1280}
+        height={720}
       />
 
       {scenes.map(({ id, component, timing }) => (

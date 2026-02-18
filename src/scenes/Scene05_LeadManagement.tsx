@@ -1,13 +1,15 @@
 import React from 'react';
-import { AbsoluteFill, useCurrentFrame, Sequence } from 'remotion';
+import { AbsoluteFill, useCurrentFrame, useVideoConfig, Sequence, interpolate, Easing } from 'remotion';
 import { BRAND } from '../data/brand';
-import { fadeIn, slideInFromBottom, scaleIn, countUp } from '../utils/animations';
+import { fadeIn, springBouncy, springSlam, countUp } from '../utils/animations';
 import { SceneContainer } from '../components/SceneContainer';
 import { GlassPanel } from '../components/GlassPanel';
+import { ImpactHit, DataLoad } from '../audio/SFX';
 import type { SceneProps } from '../types';
 
 export const Scene05_LeadManagement: React.FC<SceneProps> = ({ durationInFrames }) => {
   const frame = useCurrentFrame();
+  const { fps } = useVideoConfig();
 
   return (
     <SceneContainer
@@ -18,14 +20,17 @@ export const Scene05_LeadManagement: React.FC<SceneProps> = ({ durationInFrames 
       overlayMode="vignette"
       overlayIntensity={0.5}
     >
+      {/* SFX */}
+      <DataLoad at={100} volume={0.4} />
+      <ImpactHit at={1950} volume={0.8} />
+
       {/* Section title */}
       <Sequence from={30} durationInFrames={durationInFrames - 30}>
         <AbsoluteFill style={{ justifyContent: 'flex-start', alignItems: 'flex-start', padding: 60 }}>
-          <GlassPanel width="auto" delay={30} padding="16px 32px">
+          <GlassPanel width="auto" padding="16px 32px">
             <div style={{
-              fontSize: 36,
-              fontWeight: 'bold',
-              fontFamily: BRAND.fonts.primary,
+              fontSize: 36, fontWeight: 'bold',
+              fontFamily: BRAND.fonts.headline,
               color: BRAND.colors.primary,
               opacity: fadeIn(frame, 30, 20),
             }}>
@@ -40,12 +45,9 @@ export const Scene05_LeadManagement: React.FC<SceneProps> = ({ durationInFrames 
         <AbsoluteFill style={{ justifyContent: 'center', alignItems: 'center' }}>
           <div style={{ textAlign: 'center', opacity: fadeIn(frame, 100, 20) }}>
             <div style={{
-              fontSize: 44,
-              fontWeight: 'bold',
-              fontFamily: BRAND.fonts.primary,
-              color: 'white',
-              marginBottom: 40,
-              textShadow: '0 2px 8px rgba(0,0,0,0.8)',
+              fontSize: 44, fontWeight: 'bold',
+              fontFamily: BRAND.fonts.headline, color: 'white',
+              marginBottom: 40, textShadow: '0 2px 8px rgba(0,0,0,0.8)',
             }}>
               AI-Powered Lead Scoring
             </div>
@@ -57,40 +59,25 @@ export const Scene05_LeadManagement: React.FC<SceneProps> = ({ durationInFrames 
                 { label: 'Lead D', score: 58, temp: 'WARM', color: '#F59E0B', delay: 220 },
                 { label: 'Lead E', score: 45, temp: 'COOL', color: '#EF4444', delay: 250 },
               ].map((lead) => (
-                <GlassPanel key={lead.label} width={200} delay={lead.delay} padding="24px" borderColor={lead.color}>
+                <GlassPanel key={lead.label} width={200} padding="24px" borderColor={lead.color}>
                   <div style={{
-                    opacity: fadeIn(frame, lead.delay, 20),
-                    transform: `translateY(${slideInFromBottom(frame, lead.delay, 30)}px)`,
+                    opacity: springBouncy(frame, fps, lead.delay),
+                    transform: `scale(${springBouncy(frame, fps, lead.delay)})`,
                     textAlign: 'center',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                    gap: 16,
+                    display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 16,
                   }}>
-                    <div style={{
-                      fontSize: 24,
-                      fontWeight: 'bold',
-                      fontFamily: BRAND.fonts.primary,
-                      color: 'white',
-                    }}>
+                    <div style={{ fontSize: 24, fontWeight: 'bold', fontFamily: BRAND.fonts.primary, color: 'white' }}>
                       {lead.label}
                     </div>
                     <div style={{
-                      fontSize: 64,
-                      fontWeight: 'bold',
-                      fontFamily: BRAND.fonts.primary,
-                      color: lead.color,
+                      fontSize: 64, fontWeight: 'bold',
+                      fontFamily: BRAND.fonts.mono, color: lead.color, letterSpacing: -2,
                     }}>
                       {countUp(frame, lead.score, lead.delay + 20, 40)}
                     </div>
                     <div style={{
-                      backgroundColor: lead.color,
-                      padding: '8px 20px',
-                      borderRadius: 8,
-                      fontSize: 18,
-                      fontWeight: 'bold',
-                      fontFamily: BRAND.fonts.primary,
-                      color: 'white',
+                      backgroundColor: lead.color, padding: '8px 20px', borderRadius: 8,
+                      fontSize: 18, fontWeight: 'bold', fontFamily: BRAND.fonts.primary, color: 'white',
                     }}>
                       {lead.temp}
                     </div>
@@ -105,79 +92,44 @@ export const Scene05_LeadManagement: React.FC<SceneProps> = ({ durationInFrames 
       {/* Routing diagram */}
       <Sequence from={800} durationInFrames={600}>
         <AbsoluteFill style={{ justifyContent: 'center', alignItems: 'center' }}>
-          <GlassPanel width={1000} delay={800} padding="40px">
+          <GlassPanel width={1000} padding="40px">
             <div style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: 40,
-              justifyContent: 'center',
+              display: 'flex', alignItems: 'center', gap: 40, justifyContent: 'center',
               opacity: fadeIn(frame, 800, 20),
             }}>
-              <div style={{
-                opacity: fadeIn(frame, 820, 20),
-                transform: `scale(${scaleIn(frame, 820, 25)})`,
-                textAlign: 'center',
-              }}>
-                <div style={{
-                  width: 180,
-                  height: 120,
-                  backgroundColor: 'rgba(59,130,246,0.2)',
-                  border: '2px solid #3B82F6',
-                  borderRadius: 12,
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                }}>
-                  <div style={{ fontSize: 32, fontWeight: 'bold', fontFamily: BRAND.fonts.primary, color: '#3B82F6' }}>
-                    Leads
+              {[
+                { label: 'Leads', color: '#3B82F6', delay: 820 },
+                { label: 'AI Scoring', color: BRAND.colors.primary, delay: 880 },
+                { label: 'Agent Assignment', color: '#22C55E', delay: 940 },
+              ].map((step, i) => (
+                <React.Fragment key={i}>
+                  <div style={{
+                    opacity: springBouncy(frame, fps, step.delay),
+                    transform: `scale(${springBouncy(frame, fps, step.delay)})`,
+                  }}>
+                    <div style={{
+                      width: 180, height: 120,
+                      backgroundColor: `${step.color}22`,
+                      border: `2px solid ${step.color}`,
+                      borderRadius: 12,
+                      display: 'flex', alignItems: 'center', justifyContent: 'center',
+                      boxShadow: step.color === BRAND.colors.primary ? `0 0 30px ${step.color}44` : 'none',
+                    }}>
+                      <div style={{
+                        fontSize: step.label.length > 10 ? 28 : 32,
+                        fontWeight: 'bold', fontFamily: BRAND.fonts.primary, color: step.color, textAlign: 'center',
+                      }}>
+                        {step.label}
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </div>
-
-              <div style={{ fontSize: 48, color: BRAND.colors.primary, opacity: fadeIn(frame, 850, 15) }}>→</div>
-
-              <div style={{
-                opacity: fadeIn(frame, 880, 20),
-                transform: `scale(${scaleIn(frame, 880, 25)})`,
-              }}>
-                <div style={{
-                  width: 180,
-                  height: 120,
-                  backgroundColor: `${BRAND.colors.primary}22`,
-                  border: `2px solid ${BRAND.colors.primary}`,
-                  borderRadius: 12,
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  boxShadow: `0 0 30px ${BRAND.colors.primary}44`,
-                }}>
-                  <div style={{ fontSize: 32, fontWeight: 'bold', fontFamily: BRAND.fonts.primary, color: BRAND.colors.primary, textAlign: 'center' }}>
-                    AI Scoring
-                  </div>
-                </div>
-              </div>
-
-              <div style={{ fontSize: 48, color: BRAND.colors.primary, opacity: fadeIn(frame, 910, 15) }}>→</div>
-
-              <div style={{
-                opacity: fadeIn(frame, 940, 20),
-                transform: `scale(${scaleIn(frame, 940, 25)})`,
-              }}>
-                <div style={{
-                  width: 180,
-                  height: 120,
-                  backgroundColor: 'rgba(34,197,94,0.2)',
-                  border: '2px solid #22C55E',
-                  borderRadius: 12,
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                }}>
-                  <div style={{ fontSize: 28, fontWeight: 'bold', fontFamily: BRAND.fonts.primary, color: '#22C55E', textAlign: 'center' }}>
-                    Agent Assignment
-                  </div>
-                </div>
-              </div>
+                  {i < 2 && (
+                    <div style={{ fontSize: 48, color: BRAND.colors.primary, opacity: fadeIn(frame, step.delay + 20, 15) }}>
+                      →
+                    </div>
+                  )}
+                </React.Fragment>
+              ))}
             </div>
           </GlassPanel>
         </AbsoluteFill>
@@ -186,14 +138,11 @@ export const Scene05_LeadManagement: React.FC<SceneProps> = ({ durationInFrames 
       {/* Nurture sequence */}
       <Sequence from={1400} durationInFrames={550}>
         <AbsoluteFill style={{ justifyContent: 'center', alignItems: 'center' }}>
-          <GlassPanel width={1200} delay={1400} padding="40px">
+          <GlassPanel width={1200} padding="40px">
             <div style={{ textAlign: 'center', opacity: fadeIn(frame, 1400, 20) }}>
               <div style={{
-                fontSize: 40,
-                fontWeight: 'bold',
-                fontFamily: BRAND.fonts.primary,
-                color: 'white',
-                marginBottom: 40,
+                fontSize: 40, fontWeight: 'bold',
+                fontFamily: BRAND.fonts.headline, color: 'white', marginBottom: 40,
               }}>
                 Automated Nurture Sequence
               </div>
@@ -207,25 +156,18 @@ export const Scene05_LeadManagement: React.FC<SceneProps> = ({ durationInFrames 
                 ].map((step, i) => (
                   <React.Fragment key={i}>
                     <div style={{
-                      opacity: fadeIn(frame, step.delay, 20),
-                      transform: `scale(${scaleIn(frame, step.delay, 25)})`,
+                      opacity: springBouncy(frame, fps, step.delay),
+                      transform: `scale(${springBouncy(frame, fps, step.delay)})`,
                     }}>
                       <div style={{
-                        width: 120,
-                        height: 120,
+                        width: 120, height: 120, borderRadius: '50%',
                         backgroundColor: `${BRAND.colors.primary}22`,
                         border: `2px solid ${BRAND.colors.primary}`,
-                        borderRadius: '50%',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
+                        display: 'flex', alignItems: 'center', justifyContent: 'center',
                       }}>
                         <div style={{
-                          fontSize: 20,
-                          fontWeight: 'bold',
-                          fontFamily: BRAND.fonts.primary,
-                          color: 'white',
-                          textAlign: 'center',
+                          fontSize: 20, fontWeight: 'bold',
+                          fontFamily: BRAND.fonts.primary, color: 'white', textAlign: 'center',
                         }}>
                           {step.label}
                         </div>
@@ -242,34 +184,44 @@ export const Scene05_LeadManagement: React.FC<SceneProps> = ({ durationInFrames 
         </AbsoluteFill>
       </Sequence>
 
-      {/* Big stat: 45% Conversion Increase */}
+      {/* Big stat: 45% — Horizontal progress bar fill + count-up */}
       <Sequence from={1950} durationInFrames={300}>
         <AbsoluteFill style={{ justifyContent: 'center', alignItems: 'center' }}>
-          <GlassPanel width="auto" delay={1950} padding="40px 80px">
+          <div style={{ textAlign: 'center', opacity: fadeIn(frame, 1950, 20) }}>
             <div style={{
-              opacity: fadeIn(frame, 1950, 20),
-              transform: `scale(${scaleIn(frame, 1950, 30)})`,
-              textAlign: 'center',
+              fontSize: 160, fontWeight: 'bold',
+              fontFamily: BRAND.fonts.mono, color: BRAND.colors.primary,
+              textShadow: `0 0 80px ${BRAND.colors.primary}88`,
+              letterSpacing: -4,
+              transform: `scale(${springSlam(frame, fps, 1960)})`,
+            }}>
+              {countUp(frame, 45, 1970, 50)}%
+            </div>
+            {/* Progress bar */}
+            <div style={{
+              width: 600, height: 12, borderRadius: 6,
+              backgroundColor: 'rgba(255,255,255,0.15)',
+              margin: '24px auto 0',
+              overflow: 'hidden',
             }}>
               <div style={{
-                fontSize: 140,
-                fontWeight: 'bold',
-                fontFamily: BRAND.fonts.primary,
-                color: BRAND.colors.primary,
-                textShadow: `0 0 60px ${BRAND.colors.primary}66`,
-              }}>
-                {countUp(frame, 45, 1970, 50)}%
-              </div>
-              <div style={{
-                fontSize: 48,
-                color: 'white',
-                fontFamily: BRAND.fonts.primary,
-                marginTop: 16,
-              }}>
-                Conversion Increase
-              </div>
+                width: `${interpolate(frame, [1970, 2020], [0, 100], {
+                  extrapolateLeft: 'clamp', extrapolateRight: 'clamp',
+                  easing: Easing.out(Easing.cubic),
+                })}%`,
+                height: '100%', borderRadius: 6,
+                backgroundColor: BRAND.colors.primary,
+                boxShadow: `0 0 20px ${BRAND.colors.primary}88`,
+              }} />
             </div>
-          </GlassPanel>
+            <div style={{
+              fontSize: 48, color: 'white',
+              fontFamily: BRAND.fonts.headline, marginTop: 16,
+              textShadow: '0 2px 8px rgba(0,0,0,0.8)',
+            }}>
+              Conversion Increase
+            </div>
+          </div>
         </AbsoluteFill>
       </Sequence>
     </SceneContainer>

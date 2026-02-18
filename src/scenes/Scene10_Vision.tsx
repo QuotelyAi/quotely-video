@@ -1,8 +1,9 @@
-import { AbsoluteFill, useCurrentFrame, Sequence, interpolate, Easing } from 'remotion';
+import { AbsoluteFill, useCurrentFrame, useVideoConfig, Sequence, interpolate, Easing } from 'remotion';
 import { BRAND } from '../data/brand';
-import { fadeIn, slideInFromBottom, scaleIn, countUp } from '../utils/animations';
+import { fadeIn, slideInFromBottom, springSlam, springBouncy, countUp } from '../utils/animations';
 import { SceneContainer } from '../components/SceneContainer';
 import { GlassPanel } from '../components/GlassPanel';
+import { ImpactHit, SuccessChime } from '../audio/SFX';
 import type { SceneProps } from '../types';
 
 const features = [
@@ -23,6 +24,7 @@ const metrics = [
 
 export const Scene10_Vision: React.FC<SceneProps> = ({ durationInFrames }) => {
   const frame = useCurrentFrame();
+  const { fps } = useVideoConfig();
 
   return (
     <SceneContainer
@@ -33,50 +35,49 @@ export const Scene10_Vision: React.FC<SceneProps> = ({ durationInFrames }) => {
       overlayMode="vignette"
       overlayIntensity={0.45}
     >
-      {/* "This is happening NOW" title */}
+      {/* SFX */}
+      <ImpactHit at={10} volume={0.6} />
+      <SuccessChime at={700} volume={0.4} />
+
+      {/* "This is happening NOW" */}
       <Sequence from={10} durationInFrames={200}>
         <AbsoluteFill style={{ justifyContent: 'center', alignItems: 'center' }}>
-          <GlassPanel width="auto" delay={10} padding="40px 80px">
+          <div style={{
+            opacity: springSlam(frame, fps, 10),
+            transform: `scale(${springSlam(frame, fps, 10)})`,
+            textAlign: 'center',
+          }}>
             <div style={{
-              opacity: fadeIn(frame, 10, 20),
-              transform: `scale(${scaleIn(frame, 10, 25)})`,
-              textAlign: 'center',
+              fontSize: 72, fontWeight: 'bold', color: 'white',
+              fontFamily: BRAND.fonts.headline,
+              textShadow: '0 4px 20px rgba(0,0,0,0.8)',
             }}>
-              <div style={{
-                fontSize: 72,
-                fontWeight: 'bold',
-                color: 'white',
-                fontFamily: BRAND.fonts.primary,
-              }}>
-                This Is Happening{' '}
-                <span style={{ color: BRAND.colors.primary }}>Now</span>
-              </div>
+              This Is Happening{' '}
+              <span style={{ color: BRAND.colors.primary }}>Now</span>
             </div>
-          </GlassPanel>
+          </div>
         </AbsoluteFill>
       </Sequence>
 
-      {/* Feature montage in glass panels */}
+      {/* Feature montage */}
       <Sequence from={250} durationInFrames={450}>
         <AbsoluteFill style={{ justifyContent: 'center', alignItems: 'center' }}>
           <div style={{
-            display: 'flex',
-            flexWrap: 'wrap',
-            justifyContent: 'center',
-            gap: 20,
-            maxWidth: 1200,
-            padding: '0 60px',
+            display: 'flex', flexWrap: 'wrap', justifyContent: 'center',
+            gap: 20, maxWidth: 1200, padding: '0 60px',
           }}>
             {features.map((feature, i) => {
               const delay = 250 + i * 15;
               return (
-                <GlassPanel key={i} width={340} delay={delay} padding="24px">
-                  <div style={{ textAlign: 'center' }}>
+                <GlassPanel key={i} width={340} padding="24px">
+                  <div style={{
+                    textAlign: 'center',
+                    opacity: springBouncy(frame, fps, delay),
+                    transform: `scale(${springBouncy(frame, fps, delay)})`,
+                  }}>
                     <div style={{ fontSize: 40, marginBottom: 8 }}>{feature.icon}</div>
                     <div style={{
-                      fontSize: 22,
-                      fontWeight: 600,
-                      color: 'white',
+                      fontSize: 22, fontWeight: 600, color: 'white',
                       fontFamily: BRAND.fonts.primary,
                     }}>
                       {feature.label}
@@ -92,23 +93,17 @@ export const Scene10_Vision: React.FC<SceneProps> = ({ durationInFrames }) => {
       {/* Growth metrics row */}
       <Sequence from={700} durationInFrames={550}>
         <AbsoluteFill style={{ justifyContent: 'center', alignItems: 'center' }}>
-          <GlassPanel width={1200} delay={700} padding="40px 60px">
+          <GlassPanel width={1200} padding="40px 60px">
             <div style={{ textAlign: 'center', marginBottom: 40 }}>
               <div style={{
-                fontSize: 48,
-                fontWeight: 'bold',
-                color: 'white',
-                fontFamily: BRAND.fonts.primary,
+                fontSize: 48, fontWeight: 'bold', color: 'white',
+                fontFamily: BRAND.fonts.headline,
                 opacity: fadeIn(frame, 700, 20),
               }}>
                 The Results Speak for Themselves
               </div>
             </div>
-            <div style={{
-              display: 'flex',
-              gap: 48,
-              justifyContent: 'center',
-            }}>
+            <div style={{ display: 'flex', gap: 48, justifyContent: 'center' }}>
               {metrics.map((metric, i) => {
                 const delay = 750 + i * 20;
                 return (
@@ -118,19 +113,17 @@ export const Scene10_Vision: React.FC<SceneProps> = ({ durationInFrames }) => {
                     transform: `translateY(${slideInFromBottom(frame, delay, 20)}px)`,
                   }}>
                     <div style={{
-                      fontSize: 72,
-                      fontWeight: 'bold',
+                      fontSize: 72, fontWeight: 'bold',
                       color: BRAND.colors.primary,
-                      fontFamily: BRAND.fonts.primary,
+                      fontFamily: BRAND.fonts.mono,
                       textShadow: `0 0 30px ${BRAND.colors.primary}44`,
+                      letterSpacing: -2,
                     }}>
                       {countUp(frame, metric.value, delay, 40)}{metric.suffix}
                     </div>
                     <div style={{
-                      fontSize: 20,
-                      color: BRAND.colors.textSecondary,
-                      fontFamily: BRAND.fonts.primary,
-                      marginTop: 8,
+                      fontSize: 20, color: BRAND.colors.textSecondary,
+                      fontFamily: BRAND.fonts.primary, marginTop: 8,
                     }}>
                       {metric.label}
                     </div>
@@ -154,8 +147,7 @@ export const Scene10_Vision: React.FC<SceneProps> = ({ durationInFrames }) => {
             </defs>
             {(() => {
               const progress = interpolate(frame, [900, 1200], [0, 1], {
-                extrapolateLeft: 'clamp',
-                extrapolateRight: 'clamp',
+                extrapolateLeft: 'clamp', extrapolateRight: 'clamp',
                 easing: Easing.out(Easing.cubic),
               });
               const points = Array.from({ length: 20 }, (_, i) => {

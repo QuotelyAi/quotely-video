@@ -2,7 +2,7 @@ import { AbsoluteFill, useCurrentFrame, Sequence, spring, useVideoConfig, interp
 import { BRAND } from '../data/brand';
 import { fadeIn, slideInFromBottom } from '../utils/animations';
 import { SceneContainer } from '../components/SceneContainer';
-import { GlassPanel } from '../components/GlassPanel';
+import { SyncWhoosh } from '../audio/SFX';
 import type { SceneProps } from '../types';
 
 export const Scene02_Intro: React.FC<SceneProps> = ({ durationInFrames }) => {
@@ -27,20 +27,22 @@ export const Scene02_Intro: React.FC<SceneProps> = ({ durationInFrames }) => {
       overlayMode="vignette"
       overlayIntensity={0.55}
     >
+      {/* SFX */}
+      <SyncWhoosh at={10} volume={0.4} />
+
       {/* Q Logo */}
       <Sequence from={10} durationInFrames={440}>
         <AbsoluteFill style={{ justifyContent: 'center', alignItems: 'center', paddingBottom: 120 }}>
           <div style={{
             fontSize: 180,
             fontWeight: 'bold',
-            fontFamily: BRAND.fonts.primary,
+            fontFamily: BRAND.fonts.headline,
             color: BRAND.colors.primary,
             transform: `scale(${logoScale})`,
             textShadow: `0 0 40px ${BRAND.colors.primary}44, 0 0 80px ${BRAND.colors.primary}22`,
           }}>
             Q
           </div>
-          {/* Gold underline */}
           <div style={{
             width: underlineWidth,
             height: 4,
@@ -52,36 +54,32 @@ export const Scene02_Intro: React.FC<SceneProps> = ({ durationInFrames }) => {
         </AbsoluteFill>
       </Sequence>
 
-      {/* Title in glass panel */}
+      {/* Title — raw text, no GlassPanel */}
       <Sequence from={90} durationInFrames={360}>
         <AbsoluteFill style={{ justifyContent: 'center', alignItems: 'center', paddingTop: 100 }}>
-          <GlassPanel width="auto" delay={90} padding="32px 64px">
+          <div style={{
+            opacity: titleOpacity,
+            transform: `translateY(${titleSlide}px)`,
+            textAlign: 'center',
+          }}>
             <div style={{
-              opacity: titleOpacity,
-              transform: `translateY(${titleSlide}px)`,
-              textAlign: 'center',
+              fontSize: 56, fontWeight: 'bold', color: 'white',
+              fontFamily: BRAND.fonts.headline, letterSpacing: -1,
+              textShadow: '0 4px 20px rgba(0,0,0,0.8)',
             }}>
-              <div style={{
-                fontSize: 56,
-                fontWeight: 'bold',
-                color: 'white',
-                fontFamily: BRAND.fonts.primary,
-                letterSpacing: -1,
-              }}>
-                Run Your Insurance Agency
-              </div>
-              <div style={{
-                fontSize: 56,
-                fontWeight: 'bold',
-                fontFamily: BRAND.fonts.primary,
-                letterSpacing: -1,
-                marginTop: 8,
-              }}>
-                <span style={{ color: 'white' }}>with </span>
-                <span style={{ color: BRAND.colors.primary }}>AI</span>
-              </div>
+              Run Your Insurance Agency
             </div>
-          </GlassPanel>
+            <div style={{
+              fontSize: 56, fontWeight: 'bold',
+              fontFamily: BRAND.fonts.headline, letterSpacing: -1, marginTop: 8,
+            }}>
+              <span style={{ color: 'white' }}>with </span>
+              <span style={{
+                color: BRAND.colors.primary,
+                textShadow: `0 0 40px ${BRAND.colors.primary}44`,
+              }}>AI</span>
+            </div>
+          </div>
         </AbsoluteFill>
       </Sequence>
 
@@ -90,10 +88,8 @@ export const Scene02_Intro: React.FC<SceneProps> = ({ durationInFrames }) => {
         <AbsoluteFill style={{ justifyContent: 'center', alignItems: 'center', paddingTop: 300 }}>
           <div style={{
             opacity: subtitleOpacity,
-            fontSize: 28,
-            color: BRAND.colors.textSecondary,
-            fontFamily: BRAND.fonts.primary,
-            letterSpacing: 6,
+            fontSize: 28, color: BRAND.colors.textSecondary,
+            fontFamily: BRAND.fonts.primary, letterSpacing: 6,
             textTransform: 'uppercase',
             textShadow: '0 2px 8px rgba(0,0,0,0.8)',
           }}>

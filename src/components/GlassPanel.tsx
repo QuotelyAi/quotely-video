@@ -1,6 +1,4 @@
-import { useCurrentFrame } from 'remotion';
 import { BRAND } from '../data/brand';
-import { fadeIn, scaleIn } from '../utils/animations';
 
 interface GlassPanelProps {
   children: React.ReactNode;
@@ -8,21 +6,21 @@ interface GlassPanelProps {
   delay?: number;
   padding?: number | string;
   borderColor?: string;
+  glowColor?: string;
   style?: React.CSSProperties;
 }
 
 export const GlassPanel: React.FC<GlassPanelProps> = ({
   children,
   width = 800,
-  delay = 0,
+  delay: _delay,
   padding = '40px 48px',
   borderColor = BRAND.colors.primary,
+  glowColor,
   style,
 }) => {
-  const frame = useCurrentFrame();
-
-  const opacity = fadeIn(frame, delay, 20);
-  const scale = scaleIn(frame, delay, 25);
+  void _delay; // kept for backward-compatible call-sites
+  const glow = glowColor || borderColor;
 
   return (
     <div
@@ -35,9 +33,7 @@ export const GlassPanel: React.FC<GlassPanelProps> = ({
         borderRadius: 16,
         border: `1px solid ${borderColor}44`,
         borderTop: `2px solid ${borderColor}88`,
-        boxShadow: `0 8px 32px rgba(0,0,0,0.3), inset 0 1px 0 ${borderColor}22`,
-        opacity,
-        transform: `scale(${scale})`,
+        boxShadow: `0 8px 32px rgba(0,0,0,0.3), inset 0 1px 0 ${glow}22`,
         ...style,
       }}
     >

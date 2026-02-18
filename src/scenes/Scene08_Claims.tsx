@@ -1,12 +1,14 @@
-import { AbsoluteFill, useCurrentFrame, Sequence } from 'remotion';
+import { AbsoluteFill, useCurrentFrame, useVideoConfig, Sequence } from 'remotion';
 import { BRAND } from '../data/brand';
-import { fadeIn, slideInFromLeft, slideInFromRight, scaleIn, countUp } from '../utils/animations';
+import { fadeIn, slideInFromLeft, slideInFromRight, springBouncy, springSlam, countUp } from '../utils/animations';
 import { SceneContainer } from '../components/SceneContainer';
 import { GlassPanel } from '../components/GlassPanel';
+import { ImpactHit, DataLoad } from '../audio/SFX';
 import type { SceneProps } from '../types';
 
 export const Scene08_Claims: React.FC<SceneProps> = ({ durationInFrames }) => {
   const frame = useCurrentFrame();
+  const { fps } = useVideoConfig();
 
   return (
     <SceneContainer
@@ -17,14 +19,17 @@ export const Scene08_Claims: React.FC<SceneProps> = ({ durationInFrames }) => {
       overlayMode="vignette"
       overlayIntensity={0.5}
     >
+      {/* SFX */}
+      <DataLoad at={80} volume={0.3} />
+      <ImpactHit at={1050} volume={0.8} />
+
       {/* Section title */}
       <Sequence from={30} durationInFrames={durationInFrames - 30}>
         <AbsoluteFill style={{ justifyContent: 'flex-start', alignItems: 'flex-start', padding: 60 }}>
-          <GlassPanel width="auto" delay={30} padding="16px 32px">
+          <GlassPanel width="auto" padding="16px 32px">
             <div style={{
-              fontSize: 36,
-              fontWeight: 'bold',
-              fontFamily: BRAND.fonts.primary,
+              fontSize: 36, fontWeight: 'bold',
+              fontFamily: BRAND.fonts.headline,
               color: BRAND.colors.primary,
               opacity: fadeIn(frame, 30, 15),
             }}>
@@ -37,107 +42,77 @@ export const Scene08_Claims: React.FC<SceneProps> = ({ durationInFrames }) => {
       {/* Claims chat flow */}
       <Sequence from={80} durationInFrames={650}>
         <AbsoluteFill style={{ justifyContent: 'center', alignItems: 'center' }}>
-          <GlassPanel width={700} delay={80} padding="32px">
-            <div style={{
-              display: 'flex',
-              flexDirection: 'column',
-              gap: 16,
-            }}>
-              {/* AI: What happened? */}
+          <GlassPanel width={700} padding="32px">
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
               <div style={{
                 opacity: fadeIn(frame, 80, 15),
                 transform: `translateX(${slideInFromLeft(frame, 80, 20)}px)`,
                 alignSelf: 'flex-start',
               }}>
                 <div style={{
-                  backgroundColor: 'rgba(255,255,255,0.1)',
-                  borderRadius: 12,
-                  padding: '12px 20px',
-                  maxWidth: '70%',
+                  backgroundColor: 'rgba(255,255,255,0.1)', borderRadius: 12,
+                  padding: '12px 20px', maxWidth: '70%',
                 }}>
                   <div style={{ fontSize: 20, color: 'white', fontFamily: BRAND.fonts.primary }}>
                     What happened?
                   </div>
                 </div>
               </div>
-
-              {/* Client: Car hit */}
               <div style={{
                 opacity: fadeIn(frame, 180, 15),
                 transform: `translateX(${slideInFromRight(frame, 180, 20)}px)`,
                 alignSelf: 'flex-end',
               }}>
                 <div style={{
-                  backgroundColor: '#3B82F6',
-                  borderRadius: 12,
-                  padding: '12px 20px',
-                  maxWidth: '70%',
+                  backgroundColor: '#3B82F6', borderRadius: 12,
+                  padding: '12px 20px', maxWidth: '70%',
                 }}>
                   <div style={{ fontSize: 20, color: 'white', fontFamily: BRAND.fonts.primary }}>
                     My car was hit in a parking lot
                   </div>
                 </div>
               </div>
-
-              {/* AI: Help file */}
               <div style={{
                 opacity: fadeIn(frame, 280, 15),
                 transform: `translateX(${slideInFromLeft(frame, 280, 20)}px)`,
                 alignSelf: 'flex-start',
               }}>
                 <div style={{
-                  backgroundColor: 'rgba(255,255,255,0.1)',
-                  borderRadius: 12,
-                  padding: '12px 20px',
-                  maxWidth: '70%',
+                  backgroundColor: 'rgba(255,255,255,0.1)', borderRadius: 12,
+                  padding: '12px 20px', maxWidth: '70%',
                 }}>
                   <div style={{ fontSize: 20, color: 'white', fontFamily: BRAND.fonts.primary }}>
                     I'm sorry to hear that. Let me help you file a claim.
                   </div>
                 </div>
               </div>
-
-              {/* AI: Upload photos */}
               <div style={{
                 opacity: fadeIn(frame, 380, 15),
                 transform: `translateX(${slideInFromLeft(frame, 380, 20)}px)`,
                 alignSelf: 'flex-start',
               }}>
                 <div style={{
-                  backgroundColor: 'rgba(255,255,255,0.1)',
-                  borderRadius: 12,
-                  padding: '12px 20px',
-                  maxWidth: '70%',
+                  backgroundColor: 'rgba(255,255,255,0.1)', borderRadius: 12,
+                  padding: '12px 20px', maxWidth: '70%',
                 }}>
                   <div style={{ fontSize: 20, color: 'white', fontFamily: BRAND.fonts.primary }}>
                     Please upload photos of the damage
                   </div>
                 </div>
               </div>
-
-              {/* Client: Photo */}
               <div style={{
                 opacity: fadeIn(frame, 480, 15),
                 transform: `translateX(${slideInFromRight(frame, 480, 20)}px)`,
                 alignSelf: 'flex-end',
               }}>
                 <div style={{
-                  backgroundColor: '#3B82F6',
-                  borderRadius: 12,
-                  padding: '12px 20px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: 12,
+                  backgroundColor: '#3B82F6', borderRadius: 12,
+                  padding: '12px 20px', display: 'flex', alignItems: 'center', gap: 12,
                 }}>
                   <div style={{
-                    width: 50,
-                    height: 40,
+                    width: 50, height: 40,
                     backgroundColor: 'rgba(255,255,255,0.2)',
-                    borderRadius: 6,
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    fontSize: 20,
+                    borderRadius: 6, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 20,
                   }}>
                     IMG
                   </div>
@@ -146,8 +121,6 @@ export const Scene08_Claims: React.FC<SceneProps> = ({ durationInFrames }) => {
                   </div>
                 </div>
               </div>
-
-              {/* AI: Claim filed */}
               <div style={{
                 opacity: fadeIn(frame, 580, 15),
                 transform: `translateX(${slideInFromLeft(frame, 580, 20)}px)`,
@@ -155,10 +128,8 @@ export const Scene08_Claims: React.FC<SceneProps> = ({ durationInFrames }) => {
               }}>
                 <div style={{
                   backgroundColor: 'rgba(255,255,255,0.1)',
-                  border: `2px solid ${BRAND.colors.primary}`,
-                  borderRadius: 12,
-                  padding: '12px 20px',
-                  boxShadow: `0 0 15px ${BRAND.colors.primary}44`,
+                  border: `2px solid ${BRAND.colors.primary}`, borderRadius: 12,
+                  padding: '12px 20px', boxShadow: `0 0 15px ${BRAND.colors.primary}44`,
                 }}>
                   <div style={{ fontSize: 20, color: 'white', fontFamily: BRAND.fonts.primary }}>
                     Claim filed! Tracking{' '}
@@ -174,34 +145,21 @@ export const Scene08_Claims: React.FC<SceneProps> = ({ durationInFrames }) => {
       {/* Status tracker */}
       <Sequence from={750} durationInFrames={450}>
         <AbsoluteFill style={{ justifyContent: 'center', alignItems: 'center' }}>
-          <GlassPanel width={1000} delay={750} padding="40px">
+          <GlassPanel width={1000} padding="40px">
             <div style={{ opacity: fadeIn(frame, 750, 20) }}>
               <div style={{
-                fontSize: 32,
-                fontWeight: 'bold',
-                color: 'white',
-                fontFamily: BRAND.fonts.primary,
-                marginBottom: 40,
-                textAlign: 'center',
+                fontSize: 32, fontWeight: 'bold', color: 'white',
+                fontFamily: BRAND.fonts.headline, marginBottom: 40, textAlign: 'center',
               }}>
                 Claim Status
               </div>
               <div style={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                position: 'relative',
+                display: 'flex', justifyContent: 'space-between', alignItems: 'center', position: 'relative',
               }}>
-                {/* Background line */}
                 <div style={{
-                  position: 'absolute',
-                  top: 20,
-                  left: '10%',
-                  right: '10%',
-                  height: 3,
-                  backgroundColor: 'rgba(255,255,255,0.15)',
+                  position: 'absolute', top: 20, left: '10%', right: '10%',
+                  height: 3, backgroundColor: 'rgba(255,255,255,0.15)',
                 }} />
-
                 {[
                   { label: 'Filed', frame: 780, color: BRAND.colors.primary },
                   { label: 'Under Review', frame: 840, color: BRAND.colors.primary },
@@ -211,34 +169,24 @@ export const Scene08_Claims: React.FC<SceneProps> = ({ durationInFrames }) => {
                   const isActive = frame >= step.frame;
                   return (
                     <div key={i} style={{
-                      display: 'flex',
-                      flexDirection: 'column',
-                      alignItems: 'center',
-                      zIndex: 2,
-                      flex: 1,
+                      display: 'flex', flexDirection: 'column', alignItems: 'center', zIndex: 2, flex: 1,
                     }}>
                       <div style={{
-                        width: 40,
-                        height: 40,
-                        borderRadius: '50%',
+                        width: 40, height: 40, borderRadius: '50%',
                         backgroundColor: isActive ? step.color : 'rgba(255,255,255,0.15)',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        fontSize: 20,
-                        fontWeight: 'bold',
+                        display: 'flex', alignItems: 'center', justifyContent: 'center',
+                        fontSize: 20, fontWeight: 'bold',
                         color: isActive ? BRAND.colors.background : 'white',
                         boxShadow: isActive ? `0 0 20px ${step.color}` : 'none',
+                        transform: isActive ? `scale(${springBouncy(frame, fps, step.frame)})` : 'scale(1)',
                       }}>
                         {isActive ? '✓' : `${i + 1}`}
                       </div>
                       <div style={{
-                        marginTop: 12,
-                        fontSize: 18,
+                        marginTop: 12, fontSize: 18,
                         fontWeight: isActive ? 'bold' : 'normal',
                         color: isActive ? 'white' : BRAND.colors.textSecondary,
-                        fontFamily: BRAND.fonts.primary,
-                        textAlign: 'center',
+                        fontFamily: BRAND.fonts.primary, textAlign: 'center',
                       }}>
                         {step.label}
                       </div>
@@ -251,35 +199,64 @@ export const Scene08_Claims: React.FC<SceneProps> = ({ durationInFrames }) => {
         </AbsoluteFill>
       </Sequence>
 
-      {/* Big stat: 5x Faster Filing */}
+      {/* Big stat: 5x — Split-screen red X vs green check */}
       <Sequence from={1050} durationInFrames={735}>
         <AbsoluteFill style={{ justifyContent: 'center', alignItems: 'center' }}>
-          <GlassPanel width="auto" delay={1050} padding="40px 80px">
+          <div style={{ textAlign: 'center', opacity: fadeIn(frame, 1050, 25) }}>
             <div style={{
-              opacity: fadeIn(frame, 1050, 25),
-              transform: `scale(${scaleIn(frame, 1050, 30)})`,
-              textAlign: 'center',
+              display: 'flex', gap: 80, justifyContent: 'center', marginBottom: 40,
+              alignItems: 'center',
             }}>
+              {/* Red X — old way */}
               <div style={{
-                fontSize: 140,
-                fontWeight: 'bold',
-                color: BRAND.colors.primary,
-                fontFamily: BRAND.fonts.primary,
-                textShadow: `0 0 60px ${BRAND.colors.primary}66`,
-                lineHeight: 1,
+                width: 120, height: 120, borderRadius: '50%',
+                backgroundColor: 'rgba(239,68,68,0.2)',
+                border: '4px solid #EF4444',
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                opacity: springBouncy(frame, fps, 1070),
+                transform: `scale(${springBouncy(frame, fps, 1070)})`,
               }}>
-                {countUp(frame, 5, 1070, 50)}x
+                <div style={{ fontSize: 64, color: '#EF4444', fontWeight: 'bold', lineHeight: 1 }}>✕</div>
               </div>
+
               <div style={{
-                fontSize: 48,
-                color: 'white',
+                fontSize: 36, color: BRAND.colors.textSecondary,
                 fontFamily: BRAND.fonts.primary,
-                marginTop: 20,
+                opacity: fadeIn(frame, 1090, 15),
               }}>
-                Faster Filing
+                vs
+              </div>
+
+              {/* Green check — Quotely */}
+              <div style={{
+                width: 120, height: 120, borderRadius: '50%',
+                backgroundColor: `${BRAND.colors.primary}22`,
+                border: `4px solid ${BRAND.colors.primary}`,
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                opacity: springBouncy(frame, fps, 1100),
+                transform: `scale(${springBouncy(frame, fps, 1100)})`,
+                boxShadow: `0 0 30px ${BRAND.colors.primary}44`,
+              }}>
+                <div style={{ fontSize: 64, color: BRAND.colors.primary, fontWeight: 'bold', lineHeight: 1 }}>✓</div>
               </div>
             </div>
-          </GlassPanel>
+
+            <div style={{
+              fontSize: 140, fontWeight: 'bold',
+              fontFamily: BRAND.fonts.mono, color: BRAND.colors.primary,
+              textShadow: `0 0 60px ${BRAND.colors.primary}66`, lineHeight: 1,
+              transform: `scale(${springSlam(frame, fps, 1080)})`,
+            }}>
+              {countUp(frame, 5, 1070, 50)}x
+            </div>
+            <div style={{
+              fontSize: 48, color: 'white',
+              fontFamily: BRAND.fonts.headline, marginTop: 20,
+              textShadow: '0 2px 8px rgba(0,0,0,0.8)',
+            }}>
+              Faster Filing
+            </div>
+          </div>
         </AbsoluteFill>
       </Sequence>
     </SceneContainer>
